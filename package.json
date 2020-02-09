@@ -1,0 +1,53 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "roadhog server",
+    "build": "roadhog build",
+    "noUglifyJs": "COMPRESS=none roadhog build",
+    "lint": "eslint --ext .js src test",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "antd": "^3.0.0",
+    "antd-landing": "0.0.1",
+    "axios": "^0.18.0",
+    "babel-plugin-import": "^1.11.0",
+    "babel-register": "^6.26.0",
+    "bb-frame-animation": "^1.0.6",
+    "css-world": "^1.0.1",
+    "dva": "^2.4.1",
+    "dva-loading": "^3.0.2",
+    "dva-model-extend": "^0.1.2",
+    "enquire-js": "^0.2.1",
+    "kcors": "^2.2.2",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static-cache": "^5.1.2",
+    "moment": "^2.24.0",
+    "nprogress": "^0.2.0",
+    "rc-banner-anim": "^2.2.1",
+    "rc-queue-anim": "^1.4.0",
+    "rc-scroll-anim": "^2.2.1",
+    "rc-texty": "^0.2.0",
+    "rc-tween-one": "^1.7.0",
+    "react": "^16.2.0",
+    "react-cookie": "^1.0.5",
+    "react-dom": "^16.2.0",
+    "react-intl": "^2.4.0",
+    "react-lazyload": "^2.6.1",
+    "react-sublime-video": "^0.2.5"
+  },
+  "devDependencies": {
+    "babel-plugin-dva-hmr": "^0.3.2",
+    "eslint": "^4.14.0",
+    "eslint-config-umi": "^0.1.1",
+    "eslint-plugin-flowtype": "^2.34.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "husky": "^0.12.0",
+    "redbox-react": "^1.4.3",
+    "roadhog": "^2.5.0-beta.4"
+  }
+}

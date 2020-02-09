@@ -1,0 +1,61 @@
+stages:
+    - build
+    - deploy
+    - rollback
+
+deploy_develop:
+  stage: deploy
+  only:
+    - develop
+  tags:
+    - landing-website-dev
+  script:
+    - k8s-deploy uskid-dev landing-website-dev $(date "+%Y%m%d%H%M%S")-${CI_COMMIT_SHA:0:6} Dockerfile-dev
+
+#job_build:
+#    stage: build
+#    only:
+#        - develop
+#    script:
+#        - export APP_PATH=/var/www/landing-website
+#        - "cd $APP_PATH && git fetch origin && git reset --hard origin/develop"
+#        - "cd $APP_PATH && source ~/.nvm/nvm.sh && nvm exec v8.9 npm install && nvm exec v8.9 npm run gen:config && nvm exec v8.9 npm run build"
+#        - "cd $APP_PATH && docker-compose up --force-recreate --remove-orphans -d"
+#    tags:
+#        - dev
+
+# 部署test环境
+deploy_test:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - landing-website
+  script:
+    - kubernetes-deploy uskid-test landing-website-test $(date "+%Y%m%d%H%M%S")-${CI_COMMIT_SHA:0:6} Dockerfile-test
+  when: manual
+
+
+# 部署production环境
+deploy_production:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - landing-website
+  script:
+    - kubernetes-deploy uskid-production landing-website-production $(date "+%Y%m%d%H%M%S")-${CI_COMMIT_SHA:0:6} Dockerfile-production
+    - sh deploy-notify-production.sh
+  when: manual
+
+
+# 线上回滚
+deploy_production_rollback:
+  stage: rollback
+  only:
+    - master
+  tags:
+    - landing-website
+  script:
+    - kubernetes-rollback uskid-production landing-website-production
+  when: manual
